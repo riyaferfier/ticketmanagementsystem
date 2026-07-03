@@ -1,0 +1,23 @@
+{
+  "name": "ticket-management-appl",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riyaferfier/ticketmanagementsystem.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/riyaferfier/ticketmanagementsystem/issues"
+  },
+  "homepage": "https://github.com/riyaferfier/ticketmanagementsystem#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@types/node": "^26.0.1"
+  }
+}

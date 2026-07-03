@@ -29,6 +29,16 @@
       "status": "active",
       "failedAttempts": 0,
       "locked": false
+    },
+    {
+      "id": "usr-4",
+      "name": "Lockout Test User",
+      "email": "lockout@test.com",
+      "password": "password123",
+      "role": "customer",
+      "status": "active",
+      "failedAttempts": 5,
+      "locked": true
     }
   ],
   "tickets": [
