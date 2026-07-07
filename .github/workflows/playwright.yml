@@ -85,7 +85,7 @@ jobs:
             -H "Content-Type: text/xml" \
             -H "Authorization: Bearer $XRAY_TOKEN" \
             --data @results.xml \
-            https://eu.xray.cloud.getxray.app/api/v2/import/execution/junit)
+            "https://xray.cloud.getxray.app/api/v2/import/execution/junit?projectKey=SCRUM")
 
           echo "Xray Response:"
           echo "$RESPONSE"  
