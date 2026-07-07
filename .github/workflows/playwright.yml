@@ -59,27 +59,39 @@ jobs:
          pytest tests_python/test_login.py -v --junitxml=results.xml
 
 
-      
+    - name: Authenticate with Xray
+     run: |
+        TOKEN=$(curl -s \
+          -H "Content-Type: application/json" \
+          -X POST \
+          --data "{\"client_id\":\"${{ secrets.XRAY_CLIENT_ID }}\",\"client_secret\":\"${{ secrets.XRAY_CLIENT_SECRET }}\"}" \
+          https://xray.cloud.getxray.app/api/v2/authenticate)
+
+          echo "Authentication response:"
+          echo "$TOKEN"
+
+          TOKEN=$(echo "$TOKEN" | tr -d '"')
+
+          echo "XRAY_TOKEN=$TOKEN" >> $GITHUB_ENV 
 
          
       
-    - name: Authenticate with Xray
-      id: xray_auth
-      run: |
-        TOKEN=$(curl -H "Content-Type: application/json" \
-        -X POST \
-        --data "{\"client_id\":\"${{ secrets.XRAY_CLIENT_ID }}\",\"client_secret\":\"${{ secrets.XRAY_CLIENT_SECRET }}\"}" \
-        https://xray.cloud.getxray.app/api/v2/authenticate)
-
-        echo "XRAY_TOKEN=$TOKEN" >> $GITHUB_ENV
+   
 
 
     - name: Upload results to Xray
       run: |
-        curl -H "Content-Type: text/xml" \
-            -H "Authorization: Bearer $XRAY_TOKEN" \
-             --data @results.xml \
-             https://xray.cloud.getxray.app/api/v2/import/execution/junit
+          echo "Uploading results.xml..."
+          ls -l
+
+          RESPONSE=$(curl -s \
+          -H "Content-Type: text/xml" \
+          -H "Authorization: Bearer $XRAY_TOKEN" \
+          --data @results.xml \
+          https://xray.cloud.getxray.app/api/v2/import/execution/junit)
+
+          echo "Xray Response:"
+          echo "$RESPONSE"
     
 
 
