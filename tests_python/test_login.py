@@ -6,9 +6,9 @@ from pages.login_page import LoginPage
 from pages.dashboard_page import DashboardPage
 
 # Actual application URL running locally
-BASE_URL = "http://localhost:3001/"
+BASE_URL = "http://localhost:3002/"
 # Actual dashboard URL running locally
-DASHBOARD_URL = "http://localhost:3001/"
+DASHBOARD_URL = "http://localhost:3002/"
 
 
 def reset_lockout_user() -> None:
@@ -34,7 +34,7 @@ def setup(page: Page) -> None:
     login_page = LoginPage(page)
     login_page.navigate_to(BASE_URL)
 
-
+@pytest.mark.xray(test_key="SCRUM-29")
 def test_verify_user_can_login_with_valid_credentials(page: Page) -> None:
     login_page = LoginPage(page)
     dashboard_page = DashboardPage(page)
@@ -56,7 +56,7 @@ def test_verify_user_can_login_with_valid_credentials(page: Page) -> None:
     # Expect: User is redirected to the Dashboard
     assert dashboard_page.is_visible(), "User was not redirected to the Dashboard"
 
-
+@pytest.mark.xray(test_key="SCRUM-49")
 def test_mandatory_fields_validation(page: Page) -> None:
     login_page = LoginPage(page)
 
@@ -64,7 +64,7 @@ def test_mandatory_fields_validation(page: Page) -> None:
     login_page.click_login()
     assert login_page.is_error_message_visible(), "Error message should be displayed when fields are empty"
 
-
+@pytest.mark.xray(test_key="SCRUM-30")
 def test_invalid_credentials_display_error(page: Page) -> None:
     login_page = LoginPage(page)
 
@@ -74,7 +74,7 @@ def test_invalid_credentials_display_error(page: Page) -> None:
 
     assert login_page.is_error_message_visible(), "Error message should be displayed for invalid credentials"
 
-
+@pytest.mark.xray(test_key="SCRUM-31")
 def test_account_lockout_after_five_failed_attempts(page: Page) -> None:
     reset_lockout_user()
     login_page = LoginPage(page)
