@@ -6,9 +6,9 @@ from pages.login_page import LoginPage
 from pages.dashboard_page import DashboardPage
 
 # Actual application URL running locally
-BASE_URL = "http://localhost:3002/"
+BASE_URL = "http://localhost:3001/"
 # Actual dashboard URL running locally
-DASHBOARD_URL = "http://localhost:3002/"
+DASHBOARD_URL = "http://localhost:3001/"
 
 
 def reset_lockout_user() -> None:
